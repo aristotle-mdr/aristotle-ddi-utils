@@ -1,0 +1,32 @@
+{% load ddi_tags %}
+<ddi:fragment   xmlns:ddi="ddi:instance:3_2"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="ddi:instance:3_2 http://www.ddialliance.org/Specification/DDI-Lifecycle/3.2/XMLSchema/instance.xsd"
+                xmlns:c="ddi:conceptualcomponent:3_2"
+                xmlns:r="ddi:reusable:3_2"
+    >
+    <c:ConceptualVariable isUniversallyUnique="True">
+        <r:URN type="urn" typeOfIdentifier="Canonical">{% make_urn item %}</r:URN>
+        {% if item.responsibleOrganisation %}
+            <r:VersionResponsibility>{{ item.responsibleOrganisation }}</r:VersionResponsibility>
+        {% endif %}
+        <c:ConceptualVariableName context="aristotle-mdr">
+            <r:String>{{ item.name }}</r:String>
+        </c:ConceptualVariableName>
+        <r:Description>
+            <r:Content xmlns="http://www.w3.org/1999/xhtml">{{ item.description }}</r:Content>
+        </r:Description>
+        {% if item.property %}
+        <r:ConceptReference>
+            <r:URN type="urn" typeOfIdentifier= "Canonical">{% make_urn item.property %}</r:URN>
+            <r:TypeOfObject>Concept</r:TypeOfObject>
+        </r:ConceptReference>
+        {% endif %}
+        {% if item.objectClass %}
+        <r:UniverseReference>
+            <r:URN type="urn" typeOfIdentifier= "Canonical">{% make_urn item.objectClass %}</r:URN>
+            <r:TypeOfObject>Universe</r:TypeOfObject>
+        </r:UniverseReference>
+        {% endif %}
+    </c:ConceptualVariable>
+</ddi:fragment>
