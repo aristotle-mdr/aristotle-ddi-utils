@@ -1,0 +1,1 @@
+default_app_config = 'aristotle_ddi_utils.apps.AristotleDDIConfig'
