@@ -14,8 +14,7 @@ def make_urn(item):
     urn = 'urn:ddi:%s:%s:%s'%(agency,item.id,version)
     return urn
 
-@register.filter
-def valuedomain_dditype(item):
+def value_type(item):
 
     type_map = {
         #"":"Code",
@@ -35,4 +34,10 @@ def valuedomain_dditype(item):
     elif num_values > 0:
         value_type = "Code"
 
-    return "r:Managed" + value_type + "Representation"
+@register.filter
+def valuedomain_dditype(item):
+    return "r:Managed" + value_type(item) + "Representation"
+
+@register.filter
+def valuedomain_managed_dditype(item):
+    return "r:" + value_type(item) + "Representation"
