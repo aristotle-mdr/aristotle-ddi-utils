@@ -1,0 +1,15 @@
+{% load ddi_tags %}
+{% comment %}
+http://www.ddialliance.org/Specification/DDI-Lifecycle/3.2/XMLSchema/FieldLevelDocumentation/schemas/reusable_xsd/elements/ManagedRepresentation.html
+{% endcomment %}
+<ddi:fragment   xmlns:ddi="ddi:instance:3_2"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="ddi:instance:3_2 http://www.ddialliance.org/Specification/DDI-Lifecycle/3.2/XMLSchema/instance.xsd"
+                xmlns:r="ddi:reusable:3_2"
+    >
+    <!-- {{ item.data_type }} -->
+    <{{ item|valuedomain_managed_dditype }} isUniversallyUnique="True">
+        {% include "aristotle_mdr/downloads/ddi3.2/concept_common.html" with tag_name=item|valuedomain_managed_dditype %}
+        {% if item.data_type %}<r:RecommendedDataType>{{ item.data_type.name }}</r:RecommendedDataType>{% endif %}
+    </{{ item|valuedomain_managed_dditype }}>
+</ddi:fragment>
