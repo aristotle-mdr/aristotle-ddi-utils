@@ -33,11 +33,12 @@ def value_type(item):
         value_type = type_map.get(item.data_type.name)
     elif num_values > 0:
         value_type = "Code"
+    return value_type
 
 @register.filter
 def valuedomain_dditype(item):
-    return "r:Managed" + value_type(item) + "Representation"
+    return "r:Managed%sRepresentation"%(value_type(item))
 
 @register.filter
 def valuedomain_managed_dditype(item):
-    return "r:" + value_type(item) + "Representation"
+    return "r:%sRepresentation"%(value_type(item))
